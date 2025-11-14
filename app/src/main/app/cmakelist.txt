@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.10)
+project(edgeview-native)
+
+
+set(OpenCV_DIR "${CMAKE_SOURCE_DIR}/../opencv-android-sdk/sdk/native/jni") # Update path to OpenCV SDK
+find_package(OpenCV REQUIRED)
+
+
+add_library(native-lib SHARED
+src/main/cpp/native-lib.cpp
+src/main/cpp/native-utils.cpp
+)
+
+
+include_directories(${OpenCV_INCLUDE_DIRS})
+
+
+target_link_libraries(native-lib
+${OpenCV_LIBS}
+android
+log
+)
